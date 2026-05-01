@@ -2,7 +2,7 @@ name: 刷步数
 
 on:
   schedule:
-    - cron: '0 10,12,14 * * *'
+    - cron: '55 1,7,10,12,14,23 * * *'
   workflow_dispatch:
 
 jobs:
@@ -10,34 +10,22 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
-      # ---------------- 修复点1：最简checkout，不加多余参数
       - name: Checkout codes
-        uses: actions/checkout@v4 # 回退到最稳定版
-
-      # ---------------- 下面完全不变
+        uses: actions/checkout@v4
       - name: Update system and install zsh
         run: |
           sudo -E apt-get -qq update
           sudo -E apt-get install zsh -y
-
-      - name: 初始化Python
-        uses: actions/setup-python@v5
+          
+      - name: Init Python
+        uses: actions/setup-python@v3
         with:
-          python-version: "3.10"
-
-      - name: 开始运行
+          python-version: 3.8
+          
+      - name: Start
         env:
-          CONFIG: ${{ secrets.CONFIG }}
-          AES_KEY: ${{ secrets.AES_KEY }}
+            CONFIG: ${{ secrets.CONFIG }}
+            AES_KEY: ${{ secrets.AES_KEY }}
         run: |
-          pip install requests pytz pycryptodome
-          python main.py
-
-      # ---------------- 修复点2：自动提交，不会报token错误
-      - name: 自动提交并推送
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: Auto persist tokens
-          file_pattern: .
-env:
-  ACTIONS_RUNNER_DEBUG: true
+          pip3 install requests pytz pycryptodome
+          python3 main.py

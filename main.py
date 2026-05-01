@@ -312,6 +312,7 @@ def persist_user_tokens():
 
 if __name__ == "__main__":
     # 北京时间
+    print(os.environ.get("CONFIG"))
     time_bj = get_beijing_time()
     encrypt_support = False
     user_tokens = dict()

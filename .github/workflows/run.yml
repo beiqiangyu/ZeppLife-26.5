@@ -39,3 +39,5 @@ jobs:
         with:
           commit_message: Auto persist tokens
           file_pattern: .
+env:
+  ACTIONS_RUNNER_DEBUG: true

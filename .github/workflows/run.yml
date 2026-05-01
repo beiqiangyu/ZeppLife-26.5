@@ -12,7 +12,7 @@ jobs:
     steps:
       # ---------------- 修复点1：最简checkout，不加多余参数
       - name: Checkout codes
-        uses: actions/checkout@v5  # 回退到最稳定版
+        uses: actions/checkout@v4 # 回退到最稳定版
 
       # ---------------- 下面完全不变
       - name: Update system and install zsh
